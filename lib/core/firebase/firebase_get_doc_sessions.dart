@@ -1,0 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+Future<List> getDocSessions() async {
+  QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+      .collection('users')
+      .where("id", isEqualTo: FirebaseAuth.instance.currentUser!.uid)
+      .get();
+  return querySnapshot.docs.first["Sessions"];
+}
