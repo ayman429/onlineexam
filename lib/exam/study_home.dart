@@ -17,7 +17,7 @@ class StudyHome extends StatelessWidget {
         shadowColor: const Color(0xFFc9d3de),
         elevation: 4,
         title: const Text(
-          "مساعدة",
+          "المادة العلمية",
           style: TextStyle(
               color: AppColor.textColor1,
               fontSize: 22,

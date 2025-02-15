@@ -20,12 +20,12 @@ class _SplashScreenState extends State<SplashScreen> {
   bool isLogin = false, isAdmin = false;
   int precent = 0;
 
-  getPercent() async {
-    precent = await getDocPercent();
+  // getPercent() async {
+  //   precent = await getDocPercent();
 
-    print('precent: $precent');
-    setState(() {});
-  }
+  //   print('precent: $precent');
+  //   setState(() {});
+  // }
 
   @override
   void initState() {
@@ -34,10 +34,12 @@ class _SplashScreenState extends State<SplashScreen> {
     isAdmin = sharedPreferences!.getBool(AppString.isAdmin) ?? false;
     // Duration(seconds: 2);
     isLogin
-        ? WidgetsBinding.instance.addPostFrameCallback((_) {
-            getPercent();
-          })
+        ? precent = sharedPreferences!.getInt(AppString.precent) ?? 0
         : null;
+    // ? WidgetsBinding.instance.addPostFrameCallback((_) {
+    //     getPercent();
+    //   })
+    // : null;
     setState(() {});
   }
 

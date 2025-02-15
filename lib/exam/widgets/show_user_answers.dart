@@ -56,87 +56,85 @@ class ShowUserAnswers extends StatelessWidget {
               return const SizedBox();
             } else {
               if (snapshot.data!.isNotEmpty) {
-                return Padding(
-                  padding: const EdgeInsets.only(top: 20),
-                  child: ListView.builder(
-                    itemCount: snapshot.data!["answer"].length,
-                    itemBuilder: (context, index) {
-                      // return const Text("not  work");
-                      return Column(
-                        children: [
-                          index == 0
-                              ? Container(
-                                  padding: const EdgeInsets.all(10),
-                                  decoration: BoxDecoration(
-                                    color: AppColor.backgroundColor4,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Color(0xFFc9d3de),
-                                        blurRadius: 6,
-                                        spreadRadius: 4,
-                                        offset: Offset(2, 4),
+                return ListView.builder(
+                  itemCount: snapshot.data!["answer"].length,
+                  itemBuilder: (context, index) {
+                    // return const Text("not  work");
+                    return Column(
+                      children: [
+                        index == 0
+                            ? Container(
+                                padding: const EdgeInsets.all(10),
+                                margin: const EdgeInsets.only(top: 10),
+                                decoration: BoxDecoration(
+                                  color: AppColor.backgroundColor4,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: const [
+                                    BoxShadow(
+                                      color: Color(0xFFc9d3de),
+                                      blurRadius: 6,
+                                      spreadRadius: 4,
+                                      offset: Offset(2, 4),
+                                    ),
+                                  ],
+                                ),
+                                child: IntrinsicWidth(
+                                  child: Row(
+                                    children: [
+                                      // const Text(
+                                      //   "نقاطك",
+                                      //   style: TextStyle(
+                                      //       fontSize: 20,
+                                      //       fontWeight: FontWeight.bold,
+                                      //       color: AppColor.textColor3),
+                                      // ),
+                                      Container(
+                                        // margin:
+                                        //     const EdgeInsets.only(right: 10),
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10, vertical: 5),
+                                        decoration: BoxDecoration(
+                                          color: const Color(
+                                              0xFFb1feb1), //AppColor.backgroundColor4,
+                                          borderRadius:
+                                              BorderRadius.circular(10),
+                                        ),
+                                        child: Text(
+                                          'نتيجتك: ${snapshot.data!["userAnswersData"]["totalScore"]}',
+                                          style: const TextStyle(
+                                              color: AppColor.textColor3,
+                                              fontSize: 16,
+                                              fontWeight: FontWeight.bold),
+                                        ),
                                       ),
                                     ],
                                   ),
-                                  child: IntrinsicWidth(
-                                    child: Row(
-                                      children: [
-                                        // const Text(
-                                        //   "نقاطك",
-                                        //   style: TextStyle(
-                                        //       fontSize: 20,
-                                        //       fontWeight: FontWeight.bold,
-                                        //       color: AppColor.textColor3),
-                                        // ),
-                                        Container(
-                                          // margin:
-                                          //     const EdgeInsets.only(right: 10),
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 5),
-                                          decoration: BoxDecoration(
-                                            color: const Color(
-                                                0xFFb1feb1), //AppColor.backgroundColor4,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Text(
-                                            'نتيجتك: ${snapshot.data!["userAnswersData"]["totalScore"]}',
-                                            style: const TextStyle(
-                                                color: AppColor.textColor3,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.bold),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                )
+                                ),
+                              )
 
-                              // Text(
-                              //     'نتيجتك: ${snapshot.data!["userAnswersData"]["totalScore"]}',
-                              //     style: const TextStyle(
-                              //       fontSize: 26,
-                              //       fontWeight: FontWeight.bold,
-                              //       color: AppColor.primaryColor,
-                              //     ),
-                              //   )
-                              : SizedBox(),
-                          index == 0 ? SizedBox(height: 20) : SizedBox(),
-                          QuestionsUi(
-                            rightAnswer: postExamAnswers[index],
-                            isShowAnswer: false,
-                            showQuestionButton: true,
-                            examQuestions: postExamQuestions[index],
-                            index: index,
-                            radioValue: snapshot.data!["answer"][index],
-                            isAnswered: true,
-                            onChanged: (value) {},
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                            // Text(
+                            //     'نتيجتك: ${snapshot.data!["userAnswersData"]["totalScore"]}',
+                            //     style: const TextStyle(
+                            //       fontSize: 26,
+                            //       fontWeight: FontWeight.bold,
+                            //       color: AppColor.primaryColor,
+                            //     ),
+                            //   )
+                            : SizedBox(),
+                        index == 0 ? SizedBox(height: 20) : SizedBox(),
+                        QuestionsUi(
+                          rightAnswer: postExamAnswers[index],
+                          isShowAnswer: false,
+                          showQuestionButton: true,
+                          examQuestions: postExamQuestions[index],
+                          index: index,
+                          radioValue: snapshot.data!["answer"][index],
+                          isAnswered: true,
+                          onChanged: (value) {},
+                        ),
+                      ],
+                    );
+                  },
                 );
               } else {
                 return Center(

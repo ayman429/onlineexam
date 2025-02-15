@@ -39,6 +39,9 @@ class _SignInState extends State<SignIn> {
       backgroundColor: AppColor.backgroundColor1,
       appBar: AppBar(
         backgroundColor: AppColor.backgroundColor3,
+        surfaceTintColor: AppColor.backgroundColor3,
+        shadowColor: const Color(0xFFc9d3de),
+        elevation: 4,
         title: const Text(
           AppString.signIn,
           style: TextStyle(
@@ -134,6 +137,8 @@ class _SignInState extends State<SignIn> {
                                   ));
                             } else {
                               int precent = await getDocPercent();
+                              sharedPreferences!
+                                  .setInt(AppString.precent, precent);
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

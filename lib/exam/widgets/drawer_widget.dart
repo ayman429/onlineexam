@@ -85,7 +85,8 @@ class _DrawerWidgetState extends State<DrawerWidget> {
                   color: Colors.red,
                 ),
                 title: const Text(
-                  "مساعدة",
+                  "المادة العلمية",
+                  //"مساعدة",
                   style: TextStyle(
                     color: AppColor.textColor1,
                     fontWeight: FontWeight.bold,

@@ -12,6 +12,7 @@ import '3_third_exam.dart';
 import '4_fourth_exam.dart';
 import '5_fifth_exam.dart';
 import '6_post_exam.dart';
+import 'pdfStudy.dart';
 import 'tips_text.dart';
 
 class TipsExam extends StatefulWidget {
@@ -90,7 +91,7 @@ class _TipsExamState extends State<TipsExam> {
               // SizedBox(height: 200),
 
               Container(
-                height: 150,
+                // height: 150,
                 width: MediaQuery.sizeOf(context).width,
                 padding: const EdgeInsets.all(10),
                 decoration: BoxDecoration(
@@ -105,135 +106,191 @@ class _TipsExamState extends State<TipsExam> {
                     ),
                   ],
                 ),
-                child: Column(
-                  children: [
-                    const Text(
-                      "إذا كنت مستعدًا لبدء التدريب الخاص بك، اضغط على 'ابدأ'.",
-                      style: TextStyle(
-                          color: AppColor.textColor3,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    const SizedBox(height: 10),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: CustomButtonAuth(
-                            isloading: isLoading,
-                            text: "ابدأ",
-                            onPressed: () async {
-                              setState(() {
-                                isLoading = true;
-                              });
-                              final bool isConnected =
-                                  await InternetConnectionChecker
-                                      .instance.hasConnection;
-                              setState(() {
-                                isLoading = false;
-                              });
-                              if (isConnected) {
-                                switch (widget.value) {
-                                  case 0:
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PreExam(
-                                            userAnswers:
-                                                widget.userAnswers ?? {}),
-                                      ),
-                                      (route) => false,
-                                    );
-                                    break;
-                                  case 1:
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => FirstExam(
-                                            examLength: widget.examLength,
-                                            userAnswers:
-                                                widget.userAnswers ?? {}),
-                                      ),
-                                      (route) => false,
-                                    );
-                                    break;
-                                  case 2:
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => SecondExam(
-                                            examLength: widget.examLength,
-                                            userAnswers:
-                                                widget.userAnswers ?? {}),
-                                      ),
-                                      (route) => false,
-                                    );
-                                    break;
-                                  case 3:
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => ThirdExam(
-                                            examLength: widget.examLength,
-                                            userAnswers:
-                                                widget.userAnswers ?? {}),
-                                      ),
-                                      (route) => false,
-                                    );
-                                    break;
-                                  case 4:
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => FourthExam(
-                                            examLength: widget.examLength,
-                                            userAnswers:
-                                                widget.userAnswers ?? {}),
-                                      ),
-                                      (route) => false,
-                                    );
-                                    break;
-                                  case 5:
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => FifthExam(
-                                            examLength: widget.examLength,
-                                            userAnswers:
-                                                widget.userAnswers ?? {}),
-                                      ),
-                                      (route) => false,
-                                    );
-                                    break;
-                                  case 6:
-                                    Navigator.pushAndRemoveUntil(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PostExam(
-                                            userAnswers:
-                                                widget.userAnswers ?? {}),
-                                      ),
-                                      (route) => false,
-                                    );
-                                    break;
-                                }
-                              } else {
-                                ScaffoldMessenger.of(context)
-                                    .showSnackBar(const SnackBar(
-                                  backgroundColor: Colors.red,
-                                  content: Center(
-                                    child: Text("لا يوجد اتصال بالإنترنت",
+                child: IntrinsicHeight(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      widget.value == 0 || widget.value == 6
+                          ? SizedBox()
+                          : TextButton(
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Expanded(
+                                    child: Center(
+                                      child: Text.rich(
+                                        TextSpan(
+                                            text: "لمشاهدة المادة العلمية  ",
+                                            children: [
+                                              TextSpan(
+                                                text: "اضغط هنا",
+                                                style: TextStyle(
+                                                    color: AppColor.iconColor2,
+                                                    fontSize: 18,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                            ]),
                                         style: TextStyle(
-                                            fontSize: 20, color: Colors.white)),
+                                            color: AppColor.textColor1,
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
                                   ),
-                                  duration: Duration(seconds: 2),
-                                ));
-                              }
-                            },
+                                  // Text(
+                                  //   "اضغط هنا",
+                                  //   style: TextStyle(
+                                  //       color: AppColor.iconColor2,
+                                  //       fontSize: 18,
+                                  //       fontWeight: FontWeight.bold),
+                                  // ),
+                                ],
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => pdfStudy(
+                                        pdf: widget.pdf,
+                                        value: widget.value,
+                                        tipsExamAppBarTitle:
+                                            widget.tipsExamAppBarTitle,
+                                      ),
+                                    ));
+                              },
+                            ),
+                      Text(
+                        widget.value == 0 || widget.value == 6
+                            ? "'إذا كنت مستعدًا، اضغط على 'ابدأ"
+                            : "إذا كنت مستعدًا لبدء التدريب الخاص بك، اضغط على 'ابدأ'.",
+                        style: TextStyle(
+                            color: AppColor.textColor3,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: CustomButtonAuth(
+                              isloading: isLoading,
+                              text: "ابدأ",
+                              onPressed: () async {
+                                setState(() {
+                                  isLoading = true;
+                                });
+                                final bool isConnected =
+                                    await InternetConnectionChecker
+                                        .instance.hasConnection;
+                                setState(() {
+                                  isLoading = false;
+                                });
+                                if (isConnected) {
+                                  switch (widget.value) {
+                                    case 0:
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PreExam(
+                                              userAnswers:
+                                                  widget.userAnswers ?? {}),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      break;
+                                    case 1:
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FirstExam(
+                                              examLength: widget.examLength,
+                                              userAnswers:
+                                                  widget.userAnswers ?? {}),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      break;
+                                    case 2:
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => SecondExam(
+                                              examLength: widget.examLength,
+                                              userAnswers:
+                                                  widget.userAnswers ?? {}),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      break;
+                                    case 3:
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => ThirdExam(
+                                              examLength: widget.examLength,
+                                              userAnswers:
+                                                  widget.userAnswers ?? {}),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      break;
+                                    case 4:
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FourthExam(
+                                              examLength: widget.examLength,
+                                              userAnswers:
+                                                  widget.userAnswers ?? {}),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      break;
+                                    case 5:
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => FifthExam(
+                                              examLength: widget.examLength,
+                                              userAnswers:
+                                                  widget.userAnswers ?? {}),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      break;
+                                    case 6:
+                                      Navigator.pushAndRemoveUntil(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PostExam(
+                                              userAnswers:
+                                                  widget.userAnswers ?? {}),
+                                        ),
+                                        (route) => false,
+                                      );
+                                      break;
+                                  }
+                                } else {
+                                  ScaffoldMessenger.of(context)
+                                      .showSnackBar(const SnackBar(
+                                    backgroundColor: Colors.red,
+                                    content: Center(
+                                      child: Text("لا يوجد اتصال بالإنترنت",
+                                          style: TextStyle(
+                                              fontSize: 20,
+                                              color: Colors.white)),
+                                    ),
+                                    duration: Duration(seconds: 2),
+                                  ));
+                                }
+                              },
+                            ),
                           ),
-                        ),
-                      ],
-                    )
-                  ],
+                        ],
+                      )
+                    ],
+                  ),
                 ),
               ),
               // SizedBox(height: 20),
@@ -274,8 +331,10 @@ class _TipsExamState extends State<TipsExam> {
       //       ),
       //       child: Column(
       //         children: [
-      //           const Text(
-      //             "إذا كنت مستعدًا لبدء التدريب الخاص بك، اضغط على 'ابدأ'.",
+      // Text(
+      //                 widget.value == 0 || widget.value == 6
+      //                     ? "'إذا كنت مستعدًا، اضغط على 'ابدأ"
+      //                     : "إذا كنت مستعدًا لبدء التدريب الخاص بك، اضغط على 'ابدأ'.",
       //             style: TextStyle(
       //                 color: AppColor.textColor3,
       //                 fontSize: 18,

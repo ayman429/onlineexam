@@ -320,6 +320,11 @@ class UserSessionsWidget extends StatelessWidget {
                 fontSize: 18,
                 fontWeight: FontWeight.bold),
           ),
+          CustomTextContainer(
+            title: "الزمن الكلي",
+            value: getTotalTime(userSessions).toString().split('.000000')[0],
+          ),
+          const DividerWidget(),
           for (int i = 0; i < userSessions.length; i++) ...[
             CustomTextContainer(
               title: "زمن الجلسة ${i + 1}",
@@ -343,6 +348,19 @@ class UserSessionsWidget extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  Duration getTotalTime(userSessions) {
+    Duration totalTime = Duration.zero;
+    for (int i = 0; i < userSessions.length; i++) {
+      totalTime = totalTime +
+          Duration(
+              seconds: (int.parse(userSessions[i]['exitTime']) -
+                  int.parse(userSessions[i]['enterTime'])));
+    }
+    // print("=================");
+    // print(totalTime);
+    return totalTime;
   }
 }
 

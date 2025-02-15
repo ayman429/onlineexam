@@ -614,20 +614,21 @@ class _ExamScreenState extends State<ExamScreen> with WidgetsBindingObserver {
                               ),
                             ),
 
-                      widget.showQuestionButton
-                          ? const SizedBox()
-                          : const SizedBox(height: 20),
-                      widget.showQuestionButton
-                          ? const SizedBox()
-                          : item == widget.examQuestions.length
-                              ? const SizedBox()
-                              : Text(
-                                  "المستوى: ${widget.examQuestions[item][level][questionNumber]["Level"]}",
-                                  style: const TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: AppColor.textColor1),
-                                ),
+                      // widget.showQuestionButton
+                      //     ? const SizedBox()
+                      //     : const SizedBox(height: 20),
+                      // widget.showQuestionButton
+                      //     ? const SizedBox()
+                      //     : item == widget.examQuestions.length
+                      //         ? const SizedBox()
+                      //         : Text(
+                      //             "المستوى: ${widget.examQuestions[item][level][questionNumber]["Level"]}",
+                      //             style: const TextStyle(
+                      //                 fontSize: 20,
+                      //                 fontWeight: FontWeight.bold,
+                      //                 color: AppColor.textColor1),
+                      //           ),
+
                       widget.showQuestionButton
                           ? const SizedBox()
                           : const SizedBox(height: 20),
@@ -757,7 +758,8 @@ class _ExamScreenState extends State<ExamScreen> with WidgetsBindingObserver {
                                               }
                                             },
                                       child: Text(
-                                        "حفظ",
+                                        "تأكيد الإجابة",
+                                        //"حفظ",
                                         style: TextStyle(
                                             color: isShowAnswer
                                                 ? Colors.grey

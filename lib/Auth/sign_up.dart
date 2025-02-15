@@ -39,6 +39,9 @@ class _SignUpState extends State<SignUp> {
       backgroundColor: AppColor.backgroundColor1,
       appBar: AppBar(
         backgroundColor: AppColor.backgroundColor3,
+        surfaceTintColor: AppColor.backgroundColor3,
+        shadowColor: const Color(0xFFc9d3de),
+        elevation: 4,
         title: const Text(
           AppString.signUp,
           style: TextStyle(
@@ -131,6 +134,7 @@ class _SignUpState extends State<SignUp> {
                             sharedPreferences!.setBool(AppString.isLogIn, true);
                             sharedPreferences!
                                 .setBool(AppString.isAdmin, false);
+                            sharedPreferences!.setInt(AppString.precent, 0);
 
                             await addUserData();
                             //----------------------------------------------
